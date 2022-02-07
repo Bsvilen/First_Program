@@ -26,6 +26,7 @@ namespace sim
          
         //--------------------------------------------------------------------
         // step perform one integration step via Euler's Method 
+        //   Soon, it will implement RK4
         //--------------------------------------------------------------------
         public  void step(double dt) 
         {
@@ -35,7 +36,7 @@ namespace sim
           {
             x[i] = x[i] + f[i] * dt;
           }
-          //Console.WriteLine($"{f[0].ToString()} {f[1].ToString()}");
+          
         }
         //--------------------------------------------------------------------
         // rhsFunc: function to calculate right hand side of pendulum ODE'S
