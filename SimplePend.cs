@@ -28,7 +28,60 @@ namespace sim
         // step perform one integration step via Euler's Method 
         //   Soon, it will implement RK4
         //--------------------------------------------------------------------
-        public  void step(double dt) 
+        // RK4 method 
+
+        private double dydx(double x, double y)
+        {
+          return ((x-y)/2);
+        }
+        private double RK4Method( double x0, double y0, double x, double h)
+        {
+
+          int n = (int)((x-x0)/h); // number of itterations
+          double yi = y0;
+
+          double[] y = new double[n];  // New estimates
+          double[] t = new double[n]; // time index for each cycle
+
+          t[0] = 0.0;
+          y[0] = 0.5;
+
+
+
+          // four different states
+          double k1;
+          double k2;
+          double k3;
+          double k4;
+
+
+        // calculation for the loop
+
+        for(int i= 1;i <=n; i++ )
+        {
+            // calculation for each K value 
+            k1 = h*(dydx(x0, yi));
+            k2 = h*(dydx(x0 + 0.5*h,yi+0.5*k1));
+            k3 = h*(dydx(x0 + 0.5*h,yi+0.5*k2));
+            k4 = h*(dydx(x0 + 0.5*h,yi+0.5*k3));
+
+
+            y[i] = yi;
+
+            // update the value 
+
+            yi += (1.0/6.0)*(k1+2*k2+2*k3+k4); // updates the value of y everytime
+
+            x = x0 + h;   //update the next value of the x
+        }
+        return yi;
+
+
+        }
+        
+        
+        // Euler method
+        public void step(double dt) 
         {
           rhsFunc(x,f);
         
