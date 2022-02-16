@@ -1,6 +1,4 @@
-//============================================================================
-// simplePend.cs defines a class for simulating a Simple Pendulum
-//============================================================================
+
 using System;
 
 namespace sim
@@ -34,7 +32,7 @@ namespace sim
         {
           return ((x-y)/2);
         }
-        private double RK4Method( double x0, double y0, double x, double h)
+        private double RK4( double x0, double y0, double x, double h)
         {
 
           int n = (int)((x-x0)/h); // number of itterations
@@ -44,7 +42,7 @@ namespace sim
           double[] t = new double[n]; // time index for each cycle
 
           t[0] = 0.0;
-          y[0] = 0.5;
+          y[0] = 1.0;
 
 
 
@@ -70,9 +68,10 @@ namespace sim
 
             // update the value 
 
-            yi += (1.0/6.0)*(k1+2*k2+2*k3+k4); // updates the value of y everytime
+            yi = (1.0/6.0)*(k1+2*k2+2*k3+k4); // updates the value of y everytime
 
             x = x0 + h;   //update the next value of the x
+            
         }
         return yi;
 
@@ -104,7 +103,13 @@ namespace sim
         //--------------------------------------------------------------------
         // Getters And Setters
         //--------------------------------------------------------------------
- 
+        public double y
+        {
+          get {return yi;}
+
+          set {yi = value; }
+        }
+
           public double L
           {
 
